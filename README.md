@@ -5,20 +5,39 @@
 <h1 align="center">vCard QR Generator</h1>
 
 <p align="center">
-  A tiny Tkinter app that turns contact details into a scannable vCard QR code.
-  Cross-platform: <strong>macOS</strong>, <strong>Linux</strong>, <strong>Windows</strong>.
+  Turn contact details into a scannable vCard QR code — entirely on your own machine.<br/>
+  <strong>100% local • fully offline • zero telemetry.</strong><br/>
+  Cross-platform: macOS, Linux, Windows.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/100%25-offline-2ea44f" alt="100% offline"/>
+  <img src="https://img.shields.io/badge/telemetry-none-1f7fb6" alt="No telemetry"/>
+  <img src="https://img.shields.io/badge/network%20calls-zero-1f7fb6" alt="No network calls"/>
+  <img src="https://img.shields.io/badge/license-MIT-yellow" alt="License: MIT"/>
 </p>
 
 ---
 
+## Privacy by design
+
+Your contact details are sensitive. This app is built so they never leave your device.
+
+- **No network calls.** The app makes zero outgoing connections — not at startup, not when generating a QR, not when saving a PNG. You can run it on an air-gapped machine and it behaves identically.
+- **No accounts, no cloud, no servers.** There is nothing to sign into. The QR is computed in-process by [`qrcode`](https://github.com/lincolnloop/python-qrcode) and rendered with [`Pillow`](https://github.com/python-pillow/Pillow). The PNG is written wherever you choose, by you.
+- **No telemetry, no analytics, no crash reporting.** Nothing about you, your inputs, or your usage is ever collected or transmitted.
+- **Auditable.** The source is small (~200 lines of UI, ~30 lines of vCard/QR logic). There's no `requests`, no `urllib`, no `socket` — grep for them and you'll find none.
+
+Verify it yourself: disconnect from Wi-Fi, generate a QR, save a PNG. Same result.
+
 ## What it does
 
-Fill in name, phone, email, etc., click **Generate**, see the QR preview, click **Save as PNG…** to export. The QR encodes a vCard 3.0 string with high error correction (≈30%), so it scans reliably even on a slightly worn business card.
+Fill in name, phone, email, etc., click **Generate**, see the QR preview, click **Save as PNG…** to export. The QR encodes a vCard 3.0 string with high error correction (≈30%), so it scans reliably even on a slightly worn business card. All processing happens in-memory on your machine — nothing is uploaded anywhere.
 
 ## Run from source (any OS)
 
 ```bash
-git clone https://github.com/<your-username>/vcard-qr-generator.git
+git clone https://github.com/Aiduckman/vcard-qr-generator.git
 cd vcard-qr-generator
 
 python3 -m venv venv
@@ -34,7 +53,7 @@ The Tkinter window opens. Iterate on the UI here — bundling is slow, running d
 
 ## Build a standalone app
 
-PyInstaller (Linux + Windows) and py2app (macOS) **cannot cross-compile** — you need to build on the OS you're targeting.
+PyInstaller (Linux + Windows) and py2app (macOS) **cannot cross-compile** — you need to build on the OS you're targeting. Once built, the resulting executable is fully offline-capable: it carries its own Python runtime and dependencies, and still makes no network calls.
 
 ### macOS — py2app → `.app` bundle
 

@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-vCard QR Generator — Mac app version.
+vCard QR Generator — privacy-respecting, fully local Tkinter app.
 
-Tkinter UI wrapping the original vcard_qr.py logic.
-Bundle into a .app with: python setup.py py2app
+Nothing is sent over the network: contact info is encoded into a QR image
+entirely in-process via qrcode + Pillow. The resulting PNG is written only
+where you choose to save it. No telemetry, no analytics, no cloud.
+
+Bundle into a macOS .app with: python setup.py py2app
+Bundle into a Linux/Windows executable with: python build.py
 """
 
 import tkinter as tk
@@ -130,7 +134,7 @@ class VCardQRApp(tk.Tk):
         )
 
         # Status bar
-        self.status = ttk.Label(self, text="Ready.", anchor="w", padding=(12, 4))
+        self.status = ttk.Label(self, text="Ready  •  All data stays on this device  •  No network calls", anchor="w", padding=(12, 4))
         self.status.pack(fill="x", side="bottom")
 
     # ─── actions ──────────────────────────────────────────────────────────
