@@ -19,6 +19,28 @@
 
 ---
 
+## Download
+
+Prebuilt binaries — no Python required:
+
+- **macOS:** [vCard-QR-Generator-macOS.zip](https://github.com/Aiduckman/vcard-qr-generator/releases/latest) — unzip and drag to /Applications
+- **Linux:** [vCard-QR-Generator-Linux](https://github.com/Aiduckman/vcard-qr-generator/releases/latest) — `chmod +x` then run
+- **Windows:** [vCard-QR-Generator-Windows.exe](https://github.com/Aiduckman/vcard-qr-generator/releases/latest)
+
+[See all releases →](https://github.com/Aiduckman/vcard-qr-generator/releases)
+
+Builds are produced automatically by [GitHub Actions](.github/workflows/release.yml) on every git tag. To compile yourself instead, see [Build a standalone app](#build-a-standalone-app) below.
+
+**First-run on macOS** (the .app isn't notarized, so Gatekeeper will block it). After unzipping, strip the quarantine attribute:
+
+```bash
+xattr -cr "/Applications/vCard QR Generator.app"
+```
+
+Then right-click → Open the first time. macOS remembers the trust decision.
+
+---
+
 ## Privacy by design
 
 Your contact details are sensitive. This app is built so they never leave your device.
